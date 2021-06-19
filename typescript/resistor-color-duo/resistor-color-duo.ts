@@ -9,20 +9,15 @@ const COLORS = [
   "violet",
   "grey",
   "white",
-];
+] as const;
 
 export class ResistorColor {
-  constructor(private colors: string[]) {
+  constructor(private colors: typeof COLORS[number][]) {
     if (colors.length < 2) {
       throw new Error("At least two colors need to be present");
     }
   }
 
   value = (): number =>
-    10 * this._colorToNumber(this.colors[0]) +
-    this._colorToNumber(this.colors[1]);
-
-  _colorToNumber = (color: string): number => {
-    return COLORS.indexOf(color);
-  };
+    10 * COLORS.indexOf(this.colors[0]) + COLORS.indexOf(this.colors[1]);
 }
