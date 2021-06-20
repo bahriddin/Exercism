@@ -1,4 +1,4 @@
-const COLORS = [
+const COLOR_VALUES = [
   "black",
   "brown",
   "red",
@@ -11,13 +11,16 @@ const COLORS = [
   "white",
 ] as const;
 
+type ColorType = typeof COLOR_VALUES[number];
+
 export class ResistorColor {
-  constructor(private colors: typeof COLORS[number][]) {
+  constructor(private colors: ColorType[]) {
     if (colors.length < 2) {
       throw new Error("At least two colors need to be present");
     }
   }
 
   value = (): number =>
-    10 * COLORS.indexOf(this.colors[0]) + COLORS.indexOf(this.colors[1]);
+    10 * COLOR_VALUES.indexOf(this.colors[0]) +
+    COLOR_VALUES.indexOf(this.colors[1]);
 }
